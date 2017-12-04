@@ -1,7 +1,8 @@
 # Universal-D3D11-Hook
 [![GitHub release](https://img.shields.io/github/release/rebzzel/Universal-D3D11-Hook.svg)](https://github.com/Rebzzel/Universal-D3D11-Hook/releases)
+[![license](https://img.shields.io/github/license/rebzzel/Universal-D3D11-Hook.svg)](https://github.com/Rebzzel/Universal-D3D11-Hook/blob/master/LICENSE)
 
-**Hook for DX11 based games written on C++**
+**Universal hook for DX11 based games written in C++**
 ## What you need?
 [**DirectX SDK**](https://www.microsoft.com/en-us/download/details.aspx?id=6812)
 

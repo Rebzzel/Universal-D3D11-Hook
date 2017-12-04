@@ -8,6 +8,11 @@
 
 [**MinHook**](https://github.com/TsudaKageyu/minhook) ([NuGet](https://www.nuget.org/packages/minhook/))
 
+## How to use?
+[**Download latest release**](https://github.com/Rebzzel/Universal-D3D11-Hook/releases) and add source files to your project.
+
+After initialize the hook through ```ImplHookDX11_Init()``` function (see example).
+
 ## Example
 ```C++
 #include <windows.h>

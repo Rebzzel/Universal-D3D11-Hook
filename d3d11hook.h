@@ -30,8 +30,7 @@ extern D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device *device, ID3D11Devi
 
 // Main function in Hook. 
 // Using for initialize hook.
-// Initialize: CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(ImplHookDX11_Init), nullptr, 0, nullptr);
-D3D11_HOOK_API DWORD __stdcall ImplHookDX11_Init(LPVOID);
+D3D11_HOOK_API void __stdcall ImplHookDX11_Init(void *hwnd);
 
 // Using for unintialize hook.
 D3D11_HOOK_API void ImplHookDX11_Shutdown();

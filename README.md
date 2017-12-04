@@ -1,4 +1,6 @@
 # Universal-D3D11-Hook
+[![GitHub release](https://img.shields.io/github/release/rebzzel/Universal-D3D11-Hook.svg)](https://github.com/Rebzzel/Universal-D3D11-Hook/releases)
+
 **Hook for DX11 based games written on C++**
 ## What you need?
 [**DirectX SDK**](https://www.microsoft.com/en-us/download/details.aspx?id=6812)
@@ -8,6 +10,7 @@
 ## Example
 ```C++
 #include <windows.h>
+#include <d3d11.h>
 
 #include "d3d11hook.h"
 
@@ -21,7 +24,7 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID)
   switch (dwReason)
   {
     case DLL_PROCESS_ATTACH:
-      CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(ImplHookDX11_Init), nullptr, 0, nullptr);
+      ImplHookDX11_Init(FindWindow(0, L"WINDOWNAME"));
       break;
     case DLL_PROCESS_DETACH:
       ImplHookDX11_Shutdown();

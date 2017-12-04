@@ -11,18 +11,18 @@ typedef HRESULT(__stdcall *D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT S
 typedef void(__stdcall *D3D11DrawIndexedHook) (ID3D11DeviceContext* pContext, UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
 typedef void(__stdcall *D3D11ClearRenderTargetViewHook) (ID3D11DeviceContext* pContext, ID3D11RenderTargetView *pRenderTargetView, const FLOAT ColorRGBA[4]);
 
-static HWND						g_hWnd = nullptr;
-static ID3D11Device*			g_pd3dDevice = nullptr;
-static ID3D11DeviceContext*		g_pd3dContext = nullptr;
-static IDXGISwapChain*			g_pSwapChain = nullptr;
-static std::once_flag			g_isInitialized;
+static HWND                     g_hWnd = nullptr;
+static ID3D11Device*            g_pd3dDevice = nullptr;
+static ID3D11DeviceContext*     g_pd3dContext = nullptr;
+static IDXGISwapChain*          g_pSwapChain = nullptr;
+static std::once_flag           g_isInitialized;
 
-D3D11PresentHook				phookD3D11Present = nullptr;
-D3D11DrawIndexedHook			phookD3D11DrawIndexed = nullptr;
-D3D11ClearRenderTargetViewHook	phookD3D11ClearRenderTargetViewHook = nullptr;
+D3D11PresentHook                phookD3D11Present = nullptr;
+D3D11DrawIndexedHook            phookD3D11DrawIndexed = nullptr;
+D3D11ClearRenderTargetViewHook  phookD3D11ClearRenderTargetViewHook = nullptr;
 
-DWORD*							pSwapChainVTable = nullptr;
-DWORD*							pDeviceContextVTable = nullptr;
+DWORD*                          pSwapChainVTable = nullptr;
+DWORD*                          pDeviceContextVTable = nullptr;
 
 HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
@@ -94,7 +94,7 @@ DWORD __stdcall HookDX11_Init(LPVOID)
 	return S_OK;
 }
 
-D3D11_HOOK_API void __stdcall ImplHookDX11_Init(void *hwnd)
+D3D11_HOOK_API void ImplHookDX11_Init(void *hwnd)
 {
 	g_hWnd = (HWND)hwnd;
 	CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(HookDX11_Init), nullptr, 0, nullptr);

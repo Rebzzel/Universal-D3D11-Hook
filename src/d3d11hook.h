@@ -1,9 +1,9 @@
-/*
- *      ____ _____ ____  _ _ _   _             _
- *     |  _ \___ /|  _ \/ / | | | | ___   ___ | | __
- *     | | | ||_ \| | | | | | |_| |/ _ \ / _ \| |/ /
- *     | |_| |__) | |_| | | |  _  | (_) | (_) |   <
- *     |____/____/|____/|_|_|_| |_|\___/ \___/|_|\_\
+
+/***
+ *         _ ____    _ _ _   _             _
+ *      __| |__ / __| / / | | |_  ___  ___| |__
+ *     / _` ||_ \/ _` | | | | ' \/ _ \/ _ \ / /
+ *     \__,_|___/\__,_|_|_| |_||_\___/\___/_\_\
  *
  *     D3D11Hook by Rebzzel
  *     For compile hook you need:
@@ -28,11 +28,10 @@ struct IDXGISwapChain; // from d3d11.h
 // Use for rendering graphical user interfaces (for example: ImGui) or other.
 extern D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device *device, ID3D11DeviceContext *ctx, IDXGISwapChain *swap_chain);
 
-// Main function in Hook. 
-// Using for initialize hook.
-D3D11_HOOK_API void __stdcall ImplHookDX11_Init(void *hwnd);
+// Use for initialize hook.
+D3D11_HOOK_API void	ImplHookDX11_Init(void *hwnd);
 
-// Using for unintialize hook.
-D3D11_HOOK_API void ImplHookDX11_Shutdown();
+// Use for untialize hook (ONLY AFTER INITIALIZE).
+D3D11_HOOK_API void	ImplHookDX11_Shutdown();
 
 #endif

@@ -11,19 +11,18 @@ typedef HRESULT(__stdcall *D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT S
 typedef void(__stdcall *D3D11DrawIndexedHook) (ID3D11DeviceContext* pContext, UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
 typedef void(__stdcall *D3D11ClearRenderTargetViewHook) (ID3D11DeviceContext* pContext, ID3D11RenderTargetView *pRenderTargetView, const FLOAT ColorRGBA[4]);
 
-D3D11PresentHook phookD3D11Present = 0;
-D3D11DrawIndexedHook phookD3D11DrawIndexed = 0;
-D3D11ClearRenderTargetViewHook phookD3D11ClearRenderTargetViewHook = 0;
+static HWND						g_hWnd = nullptr;
+static ID3D11Device*			g_pd3dDevice = nullptr;
+static ID3D11DeviceContext*		g_pd3dContext = nullptr;
+static IDXGISwapChain*			g_pSwapChain = nullptr;
+static std::once_flag			g_isInitialized;
 
-DWORD* pSwapChainVTable = 0;
-DWORD* pDeviceContextVTable = 0;
+D3D11PresentHook				phookD3D11Present = nullptr;
+D3D11DrawIndexedHook			phookD3D11DrawIndexed = nullptr;
+D3D11ClearRenderTargetViewHook	phookD3D11ClearRenderTargetViewHook = nullptr;
 
-static HWND			g_hWnd = 0;
-static ID3D11Device *g_pd3dDevice = 0;
-static ID3D11DeviceContext *g_pd3dContext = 0;
-static IDXGISwapChain *g_pSwapChain = 0;
-
-static std::once_flag g_isInitialized;
+DWORD*							pSwapChainVTable = nullptr;
+DWORD*							pDeviceContextVTable = nullptr;
 
 HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
@@ -49,6 +48,7 @@ void __stdcall ClearRenderTargetViewHook(ID3D11DeviceContext* pContext, ID3D11Re
 
 DWORD __stdcall HookDX11_Init(LPVOID)
 {
+	D3D_FEATURE_LEVEL level = D3D_FEATURE_LEVEL_11_0;
 	DXGI_SWAP_CHAIN_DESC sd;
 	{
 		ZeroMemory(&sd, sizeof(sd));
@@ -62,12 +62,11 @@ DWORD __stdcall HookDX11_Init(LPVOID)
 		sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 		sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	}
-	D3D_FEATURE_LEVEL level = D3D_FEATURE_LEVEL_11_0;
 
-	HRESULT hr = D3D11CreateDeviceAndSwapChain(0, D3D_DRIVER_TYPE_HARDWARE, 0, 0, &level, 1, D3D11_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice, 0, &g_pd3dContext);
+	HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, 0, &level, 1, D3D11_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice, nullptr, &g_pd3dContext);
 	if (FAILED(hr))
 	{
-		MessageBox(g_hWnd, L"Failed to create device and swap chain.", L"Fatal Error", MB_ICONERROR);
+		MessageBox(g_hWnd, L"Failed to create device and swapchain.", L"Fatal Error", MB_ICONERROR);
 		return E_FAIL;
 	}
 

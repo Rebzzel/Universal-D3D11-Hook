@@ -33,7 +33,10 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID)
 
   return TRUE;
 }
+
 ```
+## Changelog
+**GO TO [RELEASES FOR](https://github.com/Rebzzel/Universal-D3D11-Hook/releases) SEE LATEST CHANGELOGS**
 
 ## Developers
 [**Rebzzel**](https://github.com/Rebzzel)

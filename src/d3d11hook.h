@@ -18,9 +18,6 @@
 
 #define D3D11_HOOK_API
 
-typedef void *LPVOID; // from windef.h
-typedef unsigned long DWORD; // from windef.h
-
 struct ID3D11Device; // from d3d11.h
 struct ID3D11DeviceContext; // from d3d11.h
 struct IDXGISwapChain; // from d3d11.h
@@ -29,9 +26,9 @@ struct IDXGISwapChain; // from d3d11.h
 extern D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device *device, ID3D11DeviceContext *ctx, IDXGISwapChain *swap_chain);
 
 // Use for initialize hook.
-D3D11_HOOK_API void	ImplHookDX11_Init(void *hwnd);
+D3D11_HOOK_API void	       ImplHookDX11_Init(void *hwnd);
 
 // Use for untialize hook (ONLY AFTER INITIALIZE).
-D3D11_HOOK_API void	ImplHookDX11_Shutdown();
+D3D11_HOOK_API void	       ImplHookDX11_Shutdown();
 
 #endif
